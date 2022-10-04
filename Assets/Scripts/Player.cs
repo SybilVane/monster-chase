@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
   private string WALK_ANIMATION = "Walk";
   private string GROUND_TAG = "Ground";
 
+  private string ENEMY_TAG = "Enemy";
+
   private bool isOnGround;
 
   private Vector3 scaleChange;
@@ -80,5 +82,11 @@ public class Player : MonoBehaviour
   private void OnCollisionEnter2D(Collision2D collision)
   {
     if (collision.gameObject.CompareTag(GROUND_TAG)) isOnGround = true;
+    if (collision.gameObject.CompareTag(ENEMY_TAG)) Destroy(gameObject);
   }
+private void OnTriggerEnter2D(Collider2D collision)
+  {
+    if (collision.CompareTag(ENEMY_TAG)) Destroy(gameObject);
+  }
+
 }
