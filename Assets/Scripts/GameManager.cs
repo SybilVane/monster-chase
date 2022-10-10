@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class GameManager : MonoBehaviour
 {
   public static GameManager instance;
@@ -38,17 +37,16 @@ public class GameManager : MonoBehaviour
     SceneManager.sceneLoaded -= OnLevelDidLoad;
   }
 
+  int characterIndex;
   void OnLevelDidLoad(Scene scene, LoadSceneMode mode)
   {
-
-    if (scene.name == "Gameplay" && SelectedCharacter == "Player1")
+    if (scene.name == "Gameplay")
     {
-      Instantiate(characters[0]);
-    }
-
-    if (scene.name == "Gameplay" && SelectedCharacter == "Player2")
-    {
-      Instantiate(characters[1]);
+      for (int i = 0; i < characters.Length; i++)
+      {
+        if (characters[i].name == SelectedCharacter) characterIndex = i;
+      }
+      Instantiate(characters[characterIndex]);
     }
   }
 
